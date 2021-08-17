@@ -8,6 +8,8 @@
     "node": ">=14.6.0"
   },
   "workspaces": [
+    "backends/**",
+    "frontends/**",
     "packages/**"
   ],
   "scripts": {

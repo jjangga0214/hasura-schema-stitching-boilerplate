@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:12-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${HASURA_POSTGRES_DATABASE}
+      POSTGRES_USER: ${HASURA_POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${HASURA_POSTGRES_PASSWORD}
+      PGTZ: ${HASURA_POSTGRES_TIMEZONE}
+    ports:
+      - target: 5432
+        published: ${HASURA_POSTGRES_ENDPOINT_PORT}
+        protocol: tcp
+        mode: host
+    volumes:
+      ## To executes ['initialization scripts'](https://hub.docker.com/_/postgres),
+      ## uncomment the next line, create ./data directory, and add .sh or .sql files under ./data
+      # - ./data:/docker-entrypoint-initdb.d
+      - postgres-data:/var/lib/postgresql/data
+  graphql-engine:
+    image: hasura/graphql-engine:v2.0.7.cli-migrations-v3
+    ports:
+      - target: 8080
+        published: ${HASURA_ENDPOINT_PORT}
+        protocol: tcp
+        mode: host
+    volumes:
+      - ./migrations:/hasura-migrations
+      - ./metadata:/hasura-metadata
+    depends_on:
+      - 'postgres'
+    restart: always
+    environment:
+      HASURA_GRAPHQL_ADMIN_INTERNAL_ERRORS: '${HASURA_GRAPHQL_ADMIN_INTERNAL_ERRORS}'
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+      HASURA_GRAPHQL_DATABASE_URL: '${HASURA_POSTGRES_ENDPOINT_SCHEME}://${HASURA_POSTGRES_USERNAME}:${HASURA_POSTGRES_PASSWORD}@postgres:5432/${HASURA_POSTGRES_DATABASE}'
+      HASURA_GRAPHQL_DEV_MODE: '${HASURA_GRAPHQL_DEV_MODE}'
+      HASURA_GRAPHQL_ENABLE_ALLOWLIST: '${HASURA_GRAPHQL_ENABLE_ALLOWLIST}'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: '${HASURA_GRAPHQL_ENABLE_CONSOLE}'
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: ${HASURA_GRAPHQL_ENABLED_LOG_TYPES}
+      HASURA_GRAPHQL_JWT_SECRET: ${HASURA_GRAPHQL_JWT_SECRET}
+      HASURA_GRAPHQL_LOG_LEVEL: ${HASURA_GRAPHQL_LOG_LEVEL}
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: ${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}
+      API_ENDPOINT_PORT: ${API_ENDPOINT_PORT}
+      API_ENDPOINT_IP: ${API_ENDPOINT_IP}
+      API_ENDPOINT_SCHEME: ${API_ENDPOINT_SCHEME}
+volumes:
+  postgres-data:

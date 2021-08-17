@@ -1,3 +1,7 @@
+.env
+.env.*
+!.env.example
+!.env.*.encrypted
 reports
 junit.xml
 dist
@@ -157,8 +161,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+# .env
+# .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

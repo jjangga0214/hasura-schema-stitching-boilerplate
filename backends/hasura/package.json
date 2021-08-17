@@ -1,0 +1,39 @@
+{
+  "name": "@jjangga0214/hasura",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "withenv": "dotenv -e .env.generated -e .env -e ../../.env --",
+    "dev": "yarn withenv docker-compose up -d",
+    "debug": "yarn withenv docker-compose up",
+    "down": "yarn withenv docker-compose down",
+    "clear": "yarn withenv docker-compose down --volumes",
+    "hasura": "yarn withenv hasura --skip-update-check --project .",
+    "console": "yarn hasura console",
+    "migrate": "yarn hasura migrate",
+    "apply": "yarn hasura migrate apply",
+    "rollback": "yarn hasura migrate apply --down",
+    "ts": "yarn withenv ts-node",
+    "apply:metadata": "yarn ts workflow/metadata/track_functions.ts",
+    "workflow": "yarn ts workflow/index.ts",
+    "truncate": "yarn workflow truncate",
+    "drop": "yarn hasura metadata clear && yarn workflow drop",
+    "seed": "yarn workflow seed",
+    "dotenvgen": "yarn workflow dotenvgen",
+    "gqlcodegen": "yarn withenv graphql-codegen --config gqlcodegen.yaml",
+    "postgqlcodegen": "yarn workflow gqlsdlgen",
+    "start": "yarn dev"
+  },
+  "devDependencies": {
+    "hasura-cli": "2.0.7"
+  },
+  "dependencies": {
+    "commander": "^8.1.0"
+  }
+}
