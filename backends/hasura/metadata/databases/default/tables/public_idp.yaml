@@ -1,0 +1,4 @@
+table:
+  name: idp
+  schema: public
+is_enum: true
