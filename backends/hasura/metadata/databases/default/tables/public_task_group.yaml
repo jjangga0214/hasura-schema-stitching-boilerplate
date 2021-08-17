@@ -1,52 +1,54 @@
 table:
-  name: user
+  name: task_group
   schema: public
 object_relationships:
-- name: task_group
+- name: user
   using:
-    foreign_key_constraint_on:
-      column: uid
-      table:
-        name: task_group
-        schema: public
+    foreign_key_constraint_on: uid
 array_relationships:
-- name: identities
+- name: tasks
   using:
     foreign_key_constraint_on:
-      column: user_uid
+      column: task_group_uid
       table:
-        name: identity
+        name: task
         schema: public
-- name: roles
-  using:
-    foreign_key_constraint_on:
-      column: user_uid
-      table:
-        name: user_to_role
-        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - color
+    - title
+    set:
+      user_uid: x-hasura-User-Uid
+  role: user
 select_permissions:
 - permission:
     columns:
-    - uid
+    - color
+    - title
     - created_at
     - updated_at
-    - name
+    - uid
+    - user_uid
     filter:
-      uid:
+      user_uid:
         _eq: X-Hasura-User-Uid
   role: user
 update_permissions:
 - permission:
-    check: null
+    check: {}
     columns:
-    - name
+    - color
+    - title
     filter:
-      uid:
+      user_uid:
         _eq: X-Hasura-User-Uid
   role: user
 delete_permissions:
 - permission:
     filter:
-      uid:
+      user_uid:
         _eq: X-Hasura-User-Uid
   role: user

@@ -1,0 +1,61 @@
+table:
+  name: task
+  schema: public
+object_relationships:
+- name: task_group
+  using:
+    foreign_key_constraint_on: task_group_uid
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      task_group:
+        user_uid:
+          _eq: X-Hasura-User-Uid
+    columns:
+    - date
+    - is_done
+    - task_group_uid
+    - time
+    - title
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - is_done
+    - date
+    - title
+    - time
+    - created_at
+    - updated_at
+    - task_group_uid
+    - uid
+    filter:
+      task_group:
+        user_uid:
+          _eq: X-Hasura-User-Uid
+  role: user
+update_permissions:
+- permission:
+    check:
+      task_group:
+        user_uid:
+          _eq: X-Hasura-User-Uid
+    columns:
+    - date
+    - is_done
+    - task_group_uid
+    - time
+    - title
+    filter:
+      task_group:
+        user_uid:
+          _eq: X-Hasura-User-Uid
+  role: user
+delete_permissions:
+- permission:
+    filter:
+      task_group:
+        user_uid:
+          _eq: X-Hasura-User-Uid
+  role: user

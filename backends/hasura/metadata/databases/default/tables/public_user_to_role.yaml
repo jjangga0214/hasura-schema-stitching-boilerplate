@@ -1,0 +1,15 @@
+table:
+  name: user_to_role
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - uid
+    - created_at
+    - updated_at
+    - user_uid
+    - role
+    filter:
+      user_uid:
+        _eq: X-Hasura-User-Uid
+  role: user
