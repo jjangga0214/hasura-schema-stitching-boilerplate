@@ -9,3 +9,7 @@
 ![pr welcome](https://img.shields.io/badge/PRs-welcome-09FF33.svg?style=flat-square&labelColor=black)
 
 🚧 WIP
+
+## Steps
+
+1. Edit `$JWT_PRIVATE_KEY_PATH` and `$JWT_PUBLIC_KEY_PATH`.
