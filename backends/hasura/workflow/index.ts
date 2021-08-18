@@ -2,7 +2,7 @@
 // import path from 'path'
 import { program } from 'commander'
 // import { query } from '#hasura/client/postgres'
-// import seed from '#hasura/seed'
+import seed from './seeds'
 // import { genCommonSdl } from './gqlsdlgen'
 import { genDotenv } from './dotenvgen'
 
@@ -31,13 +31,13 @@ import { genDotenv } from './dotenvgen'
 //     console.log(JSON.stringify(res, null, 2))
 //   })
 
-// program
-//   .command('seed')
-//   .description('seed data into tables')
-//   .action(async () => {
-//     const res = await seed()
-//     console.log(JSON.stringify(res, null, 2))
-//   })
+program
+  .command('seed')
+  .description('seed data into tables')
+  .action(async () => {
+    const res = await seed()
+    console.log(JSON.stringify(res, null, 2))
+  })
 
 // program
 //   .command('gqlsdlgen')

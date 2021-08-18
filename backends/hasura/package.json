@@ -31,9 +31,14 @@
     "start": "yarn dev"
   },
   "devDependencies": {
+    "@types/faker": "^5.5.8",
     "hasura-cli": "2.0.7"
   },
   "dependencies": {
-    "commander": "^8.1.0"
+    "commander": "^8.1.0",
+    "faker": "^5.5.3",
+    "graphql-request": "^3.5.0",
+    "graphql-tag": "^2.12.5",
+    "pg": "^8.7.1"
   }
 }
