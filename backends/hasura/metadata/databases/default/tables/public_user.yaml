@@ -1,14 +1,6 @@
 table:
   name: user
   schema: public
-object_relationships:
-- name: task_group
-  using:
-    foreign_key_constraint_on:
-      column: uid
-      table:
-        name: task_group
-        schema: public
 array_relationships:
 - name: identities
   using:
@@ -23,6 +15,13 @@ array_relationships:
       column: user_uid
       table:
         name: user_to_role
+        schema: public
+- name: task_groups
+  using:
+    foreign_key_constraint_on:
+      column: user_uid
+      table:
+        name: task_group
         schema: public
 select_permissions:
 - permission:
