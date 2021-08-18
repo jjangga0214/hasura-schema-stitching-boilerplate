@@ -9,16 +9,16 @@ import { Overwrite } from 'utility-types'
 
 const redirectUri = `${process.env.FRONTEND_ENDPOINT_SCHEME}://${process.env.FRONTEND_ENDPOINT_IP}:${process.env.FRONTEND_ENDPOINT_PORT}/oauth2/callback/kakao`
 
-export function getAuthUrl() {
-  const params = {
+export function getAuthUrl(params?: Record<string, string>) {
+  return `https://kauth.kakao.com/oauth/authorize?${qs.stringify({
     client_id: process.env.API_OAUTH2_KAKAO_CLIENT_ID,
     redirect_uri: redirectUri,
     response_type: 'code',
     // scope 는 querystring 으로 넘기지 않고 내 어플리케이션 설정에서 미리 정해놓는다.
     // TODO: not using state?
     state: 1111,
-  }
-  return `https://kauth.kakao.com/oauth/authorize?${qs.stringify(params)}`
+    ...params,
+  })}`
 }
 
 export async function getAccessToken(code: string) {
@@ -38,18 +38,21 @@ export async function getAccessToken(code: string) {
     refresh_token_expires_in: number //	리프레시 토큰 만료 시간(초)
     scope: string // 인증된 사용자의 정보 조회 권한 범위. 범위가 여러 개일 경우, 공백으로 구분
   }
-
-  const res = await axios.post<Response>(
-    `https://kauth.kakao.com/oauth/token`,
-    qs.stringify(params),
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+  try {
+    const res = await axios.post<Response>(
+      `https://kauth.kakao.com/oauth/token`,
+      qs.stringify(params),
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+        },
       },
-    },
-  )
-
-  return res.data.access_token
+    )
+    return res.data.access_token
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
 }
 
 export interface UserInfo {

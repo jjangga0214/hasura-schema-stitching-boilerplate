@@ -148,10 +148,11 @@ export async function signInOrUp({ code, idp }: SignInOrUpOptions) {
 
   return {
     result,
-    user: {
-      id: user.id,
-    },
-    access_token: accessToken,
+    // user: {
+    //   id: user.id,
+    // },
+    id: user.id,
+    accessToken,
     // refresh_token: refreshToken, // TODO
   }
 }

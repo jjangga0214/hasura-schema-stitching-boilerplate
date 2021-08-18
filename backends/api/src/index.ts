@@ -4,6 +4,7 @@ import { ApolloServer, AuthenticationError } from 'apollo-server'
 import { stitchSchemas } from '@graphql-tools/stitch'
 import { introspectSchema } from '@graphql-tools/wrap'
 import * as jwt from './logic/jwt'
+import { getAdditionalSchema } from './additionalSchema'
 
 import { getExecutor, transforms } from './hasura'
 
@@ -24,6 +25,9 @@ async function main() {
 
         //   }
         // }
+      },
+      {
+        schema: await getAdditionalSchema(),
       },
     ],
   })

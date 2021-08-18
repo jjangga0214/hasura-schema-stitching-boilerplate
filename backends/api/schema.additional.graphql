@@ -1,0 +1,30 @@
+type Query {
+  ping: String!
+}
+
+type Mutation {
+  signInOrUp(input: SignInOrUpInput): SignInOrUpMPayload!
+}
+
+input SignInOrUpInput {
+  code: String!
+  idp: IdpEnum!
+}
+
+enum IdpEnum {
+  FACEBOOK
+  GOOGLE
+  KAKAO
+  NAVER
+}
+
+enum SignInOrUpResult {
+  SIGN_UP
+  SIGN_IN
+}
+
+type SignInOrUpMPayload {
+  result: SignInOrUpResult!
+  id: ID
+  accessToken: String!
+}

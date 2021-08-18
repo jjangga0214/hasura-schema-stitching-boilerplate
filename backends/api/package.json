@@ -22,6 +22,7 @@
     "coverage": "jest --coverage",
     "coverage:show": "live-server coverage",
     "accessToken": "yarn withenv ts-node workflow/index.ts",
+    "ts": "yarn withenv ts-node",
     "dev": "yarn withenv ts-node-dev -r tsconfig-paths/register src/index.ts",
     "start": "node dist/index.js"
   },
@@ -31,6 +32,9 @@
     "utility-types": "^3.10.0"
   },
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^7.0.4",
+    "@graphql-tools/load": "^7.1.6",
+    "@graphql-tools/schema": "^8.1.1",
     "@graphql-tools/stitch": "^8.1.2",
     "@graphql-tools/utils": "^8.0.2",
     "@graphql-tools/wrap": "^8.0.8",
