@@ -46,6 +46,13 @@
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "flutter(Tasker)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "cwd": "frontends/tasker"
     }
   ],
   "inputs": [
