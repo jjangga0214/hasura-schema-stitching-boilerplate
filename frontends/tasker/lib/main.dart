@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_flutter_sdk/common.dart'; // import utility methods
+import 'package:kakao_flutter_sdk/user.dart'; // must be imported if version is 0.6.4 or higher
+import 'package:kakao_flutter_sdk/auth.dart';
+import 'generated/env.dart';
 
 void main() {
+  KakaoContext.clientId = TASKER_OAUTH2_KAKAO_CLIENT_ID;
   runApp(MyApp());
 }
 
