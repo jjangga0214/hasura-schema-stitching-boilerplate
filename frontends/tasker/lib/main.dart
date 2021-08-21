@@ -4,6 +4,7 @@ import 'package:kakao_flutter_sdk/user.dart'; // must be imported if version is 
 import 'package:kakao_flutter_sdk/auth.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:get/get.dart';
+import 'package:tasker/pages/login.dart';
 import 'controllers/main.dart';
 import 'pages/home.dart';
 import 'generated/env.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: HomePage(),
+        home: true ? LoginPage() : HomePage(),
       ),
     );
   }
