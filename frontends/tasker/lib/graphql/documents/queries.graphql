@@ -1,0 +1,21 @@
+query getTaskGroupsAndTasks {
+  taskGroupConnection {
+    edges {
+      cursor
+      node {
+        id
+        title
+        color
+        tasks {
+          id
+          title
+          date
+          time
+          isDone
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+}

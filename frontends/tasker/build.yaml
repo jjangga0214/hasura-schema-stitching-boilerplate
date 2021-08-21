@@ -1,0 +1,27 @@
+targets:
+  $default:
+    builders:
+      artemis:
+        options:
+          schema_mapping:
+            - output: lib/generated/graphql.dart
+              schema: lib/graphql/schema.graphql
+              queries_glob: lib/graphql/documents/**.graphql
+              naming_scheme: simple
+          scalar_mapping:
+            - graphql_type: Uuid
+              dart_type: String
+            - graphql_type: Bigint
+              dart_type: int
+            - graphql_type: Date
+              dart_type: DateTime
+              custom_parser_import: '../graphql/coercers.dart'
+            - graphql_type: Timetz
+              dart_type:
+                name: TimeOfDay
+                imports:
+                  - 'package:flutter/material.dart'
+              custom_parser_import: '../graphql/coercers.dart'
+            - graphql_type: Timestamptz
+              dart_type: DateTime
+              custom_parser_import: '../graphql/coercers.dart'

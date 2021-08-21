@@ -1,0 +1,3446 @@
+type Query {
+  """
+  fetch data from the table: "identity"
+  """
+  identityConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdentitySelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdentityOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdentityBoolExp
+  ): IdentityConnection!
+
+  """
+  fetch data from the table: "idp"
+  """
+  idpConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdpSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdpOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdpBoolExp
+  ): IdpConnection!
+  node(
+    """
+    A globally unique id
+    """
+    id: ID!
+  ): Node
+
+  """
+  fetch data from the table: "role"
+  """
+  roleConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [RoleSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [RoleOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: RoleBoolExp
+  ): RoleConnection!
+
+  """
+  fetch data from the table: "task"
+  """
+  taskConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskBoolExp
+  ): TaskConnection!
+
+  """
+  fetch data from the table: "task_group"
+  """
+  taskGroupConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskGroupSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskGroupOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskGroupBoolExp
+  ): TaskGroupConnection!
+
+  """
+  fetch data from the table: "user"
+  """
+  userConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [UserSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [UserOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: UserBoolExp
+  ): UserConnection!
+
+  """
+  fetch data from the table: "user_to_role"
+  """
+  userToRoleConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [UserToRoleSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [UserToRoleOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: UserToRoleBoolExp
+  ): UserToRoleConnection!
+  ping: String!
+}
+
+type Mutation {
+  """
+  delete data from the table: "identity"
+  """
+  deleteIdentity(
+    """
+    filter the rows which have to be deleted
+    """
+    where: IdentityBoolExp!
+  ): IdentityMutationResponse
+
+  """
+  delete single row from the table: "identity"
+  """
+  deleteIdentityByPk(uid: Uuid!): Identity
+
+  """
+  delete data from the table: "idp"
+  """
+  deleteIdp(
+    """
+    filter the rows which have to be deleted
+    """
+    where: IdpBoolExp!
+  ): IdpMutationResponse
+
+  """
+  delete single row from the table: "idp"
+  """
+  deleteIdpByPk(value: String!): Idp
+
+  """
+  delete data from the table: "role"
+  """
+  deleteRole(
+    """
+    filter the rows which have to be deleted
+    """
+    where: RoleBoolExp!
+  ): RoleMutationResponse
+
+  """
+  delete single row from the table: "role"
+  """
+  deleteRoleByPk(value: String!): Role
+
+  """
+  delete data from the table: "task"
+  """
+  deleteTask(
+    """
+    filter the rows which have to be deleted
+    """
+    where: TaskBoolExp!
+  ): TaskMutationResponse
+
+  """
+  delete single row from the table: "task"
+  """
+  deleteTaskByPk(uid: Uuid!): Task
+
+  """
+  delete data from the table: "task_group"
+  """
+  deleteTaskGroup(
+    """
+    filter the rows which have to be deleted
+    """
+    where: TaskGroupBoolExp!
+  ): TaskGroupMutationResponse
+
+  """
+  delete single row from the table: "task_group"
+  """
+  deleteTaskGroupByPk(uid: Uuid!): TaskGroup
+
+  """
+  delete data from the table: "user"
+  """
+  deleteUser(
+    """
+    filter the rows which have to be deleted
+    """
+    where: UserBoolExp!
+  ): UserMutationResponse
+
+  """
+  delete single row from the table: "user"
+  """
+  deleteUserByPk(uid: Uuid!): User
+
+  """
+  delete data from the table: "user_to_role"
+  """
+  deleteUserToRole(
+    """
+    filter the rows which have to be deleted
+    """
+    where: UserToRoleBoolExp!
+  ): UserToRoleMutationResponse
+
+  """
+  delete single row from the table: "user_to_role"
+  """
+  deleteUserToRoleByPk(uid: Uuid!): UserToRole
+
+  """
+  insert data into the table: "identity"
+  """
+  insertIdentity(
+    """
+    the rows to be inserted
+    """
+    objects: [IdentityInsertInput!]!
+
+    """
+    on conflict condition
+    """
+    onConflict: IdentityOnConflict
+  ): IdentityMutationResponse
+
+  """
+  insert a single row into the table: "identity"
+  """
+  insertIdentityOne(
+    """
+    the row to be inserted
+    """
+    object: IdentityInsertInput!
+
+    """
+    on conflict condition
+    """
+    onConflict: IdentityOnConflict
+  ): Identity
+
+  """
+  insert data into the table: "idp"
+  """
+  insertIdp(
+    """
+    the rows to be inserted
+    """
+    objects: [IdpInsertInput!]!
+
+    """
+    on conflict condition
+    """
+    onConflict: IdpOnConflict
+  ): IdpMutationResponse
+
+  """
+  insert a single row into the table: "idp"
+  """
+  insertIdpOne(
+    """
+    the row to be inserted
+    """
+    object: IdpInsertInput!
+
+    """
+    on conflict condition
+    """
+    onConflict: IdpOnConflict
+  ): Idp
+
+  """
+  insert data into the table: "role"
+  """
+  insertRole(
+    """
+    the rows to be inserted
+    """
+    objects: [RoleInsertInput!]!
+
+    """
+    on conflict condition
+    """
+    onConflict: RoleOnConflict
+  ): RoleMutationResponse
+
+  """
+  insert a single row into the table: "role"
+  """
+  insertRoleOne(
+    """
+    the row to be inserted
+    """
+    object: RoleInsertInput!
+
+    """
+    on conflict condition
+    """
+    onConflict: RoleOnConflict
+  ): Role
+
+  """
+  insert data into the table: "task"
+  """
+  insertTask(
+    """
+    the rows to be inserted
+    """
+    objects: [TaskInsertInput!]!
+
+    """
+    on conflict condition
+    """
+    onConflict: TaskOnConflict
+  ): TaskMutationResponse
+
+  """
+  insert data into the table: "task_group"
+  """
+  insertTaskGroup(
+    """
+    the rows to be inserted
+    """
+    objects: [TaskGroupInsertInput!]!
+
+    """
+    on conflict condition
+    """
+    onConflict: TaskGroupOnConflict
+  ): TaskGroupMutationResponse
+
+  """
+  insert a single row into the table: "task_group"
+  """
+  insertTaskGroupOne(
+    """
+    the row to be inserted
+    """
+    object: TaskGroupInsertInput!
+
+    """
+    on conflict condition
+    """
+    onConflict: TaskGroupOnConflict
+  ): TaskGroup
+
+  """
+  insert a single row into the table: "task"
+  """
+  insertTaskOne(
+    """
+    the row to be inserted
+    """
+    object: TaskInsertInput!
+
+    """
+    on conflict condition
+    """
+    onConflict: TaskOnConflict
+  ): Task
+
+  """
+  insert data into the table: "user"
+  """
+  insertUser(
+    """
+    the rows to be inserted
+    """
+    objects: [UserInsertInput!]!
+
+    """
+    on conflict condition
+    """
+    onConflict: UserOnConflict
+  ): UserMutationResponse
+
+  """
+  insert a single row into the table: "user"
+  """
+  insertUserOne(
+    """
+    the row to be inserted
+    """
+    object: UserInsertInput!
+
+    """
+    on conflict condition
+    """
+    onConflict: UserOnConflict
+  ): User
+
+  """
+  insert data into the table: "user_to_role"
+  """
+  insertUserToRole(
+    """
+    the rows to be inserted
+    """
+    objects: [UserToRoleInsertInput!]!
+
+    """
+    on conflict condition
+    """
+    onConflict: UserToRoleOnConflict
+  ): UserToRoleMutationResponse
+
+  """
+  insert a single row into the table: "user_to_role"
+  """
+  insertUserToRoleOne(
+    """
+    the row to be inserted
+    """
+    object: UserToRoleInsertInput!
+
+    """
+    on conflict condition
+    """
+    onConflict: UserToRoleOnConflict
+  ): UserToRole
+
+  """
+  update data of the table: "identity"
+  """
+  updateIdentity(
+    """
+    append existing jsonb value of filtered columns with new jsonb value
+    """
+    _append: IdentityAppendInput
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _deleteAtPath: IdentityDeleteAtPathInput
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _deleteElem: IdentityDeleteElemInput
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _deleteKey: IdentityDeleteKeyInput
+
+    """
+    prepend existing jsonb value of filtered columns with new jsonb value
+    """
+    _prepend: IdentityPrependInput
+
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: IdentitySetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: IdentityBoolExp!
+  ): IdentityMutationResponse
+
+  """
+  update single row of the table: "identity"
+  """
+  updateIdentityByPk(
+    """
+    append existing jsonb value of filtered columns with new jsonb value
+    """
+    _append: IdentityAppendInput
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _deleteAtPath: IdentityDeleteAtPathInput
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _deleteElem: IdentityDeleteElemInput
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _deleteKey: IdentityDeleteKeyInput
+
+    """
+    prepend existing jsonb value of filtered columns with new jsonb value
+    """
+    _prepend: IdentityPrependInput
+
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: IdentitySetInput
+    pkColumns: IdentityPkColumnsInput!
+  ): Identity
+
+  """
+  update data of the table: "idp"
+  """
+  updateIdp(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: IdpSetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: IdpBoolExp!
+  ): IdpMutationResponse
+
+  """
+  update single row of the table: "idp"
+  """
+  updateIdpByPk(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: IdpSetInput
+    pkColumns: IdpPkColumnsInput!
+  ): Idp
+
+  """
+  update data of the table: "role"
+  """
+  updateRole(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: RoleSetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: RoleBoolExp!
+  ): RoleMutationResponse
+
+  """
+  update single row of the table: "role"
+  """
+  updateRoleByPk(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: RoleSetInput
+    pkColumns: RolePkColumnsInput!
+  ): Role
+
+  """
+  update data of the table: "task"
+  """
+  updateTask(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: TaskSetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: TaskBoolExp!
+  ): TaskMutationResponse
+
+  """
+  update single row of the table: "task"
+  """
+  updateTaskByPk(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: TaskSetInput
+    pkColumns: TaskPkColumnsInput!
+  ): Task
+
+  """
+  update data of the table: "task_group"
+  """
+  updateTaskGroup(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: TaskGroupIncInput
+
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: TaskGroupSetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: TaskGroupBoolExp!
+  ): TaskGroupMutationResponse
+
+  """
+  update single row of the table: "task_group"
+  """
+  updateTaskGroupByPk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: TaskGroupIncInput
+
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: TaskGroupSetInput
+    pkColumns: TaskGroupPkColumnsInput!
+  ): TaskGroup
+
+  """
+  update data of the table: "user"
+  """
+  updateUser(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: UserSetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: UserBoolExp!
+  ): UserMutationResponse
+
+  """
+  update single row of the table: "user"
+  """
+  updateUserByPk(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: UserSetInput
+    pkColumns: UserPkColumnsInput!
+  ): User
+
+  """
+  update data of the table: "user_to_role"
+  """
+  updateUserToRole(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: UserToRoleSetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: UserToRoleBoolExp!
+  ): UserToRoleMutationResponse
+
+  """
+  update single row of the table: "user_to_role"
+  """
+  updateUserToRoleByPk(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: UserToRoleSetInput
+    pkColumns: UserToRolePkColumnsInput!
+  ): UserToRole
+  signInOrUp(input: SignInOrUpInput): SignInOrUpMPayload!
+}
+
+type Subscription {
+  """
+  fetch data from the table: "identity"
+  """
+  identityConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdentitySelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdentityOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdentityBoolExp
+  ): IdentityConnection!
+
+  """
+  fetch data from the table: "idp"
+  """
+  idpConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdpSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdpOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdpBoolExp
+  ): IdpConnection!
+  node(
+    """
+    A globally unique id
+    """
+    id: ID!
+  ): Node
+
+  """
+  fetch data from the table: "role"
+  """
+  roleConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [RoleSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [RoleOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: RoleBoolExp
+  ): RoleConnection!
+
+  """
+  fetch data from the table: "task"
+  """
+  taskConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskBoolExp
+  ): TaskConnection!
+
+  """
+  fetch data from the table: "task_group"
+  """
+  taskGroupConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskGroupSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskGroupOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskGroupBoolExp
+  ): TaskGroupConnection!
+
+  """
+  fetch data from the table: "user"
+  """
+  userConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [UserSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [UserOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: UserBoolExp
+  ): UserConnection!
+
+  """
+  fetch data from the table: "user_to_role"
+  """
+  userToRoleConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [UserToRoleSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [UserToRoleOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: UserToRoleBoolExp
+  ): UserToRoleConnection!
+}
+
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
+input BooleanComparisonExp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _isNull: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+"""
+An object with globally unique ID
+"""
+interface Node {
+  """
+  A globally unique identifier
+  """
+  id: ID!
+}
+
+type PageInfo {
+  endCursor: String!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String!
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input StringComparisonExp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """
+  does the column match the given case-insensitive pattern
+  """
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _isNull: Boolean
+
+  """
+  does the column match the given pattern
+  """
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """
+  does the column NOT match the given case-insensitive pattern
+  """
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """
+  does the column NOT match the given pattern
+  """
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """
+  does the column NOT match the given SQL regular expression
+  """
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """
+  does the column match the given SQL regular expression
+  """
+  _similar: String
+}
+
+scalar Bigint
+
+"""
+Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'.
+"""
+input BigintComparisonExp {
+  _eq: Bigint
+  _gt: Bigint
+  _gte: Bigint
+  _in: [Bigint!]
+  _isNull: Boolean
+  _lt: Bigint
+  _lte: Bigint
+  _neq: Bigint
+  _nin: [Bigint!]
+}
+
+scalar Date
+
+"""
+Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'.
+"""
+input DateComparisonExp {
+  _eq: Date
+  _gt: Date
+  _gte: Date
+  _in: [Date!]
+  _isNull: Boolean
+  _lt: Date
+  _lte: Date
+  _neq: Date
+  _nin: [Date!]
+}
+
+"""
+columns and relationships of "identity"
+"""
+type Identity implements Node {
+  createdAt: Timestamptz!
+  id: ID!
+  idp: IdpEnum!
+  idpId: String!
+  props(
+    """
+    JSON select path
+    """
+    path: String
+  ): Jsonb
+  uid: Uuid!
+  updatedAt: Timestamptz!
+
+  """
+  An object relationship
+  """
+  user: User!
+  userUid: Uuid!
+}
+
+"""
+A Relay connection object on "identity"
+"""
+type IdentityConnection {
+  edges: [IdentityEdge!]!
+  pageInfo: PageInfo!
+}
+
+type IdentityEdge {
+  cursor: String!
+  node: Identity!
+}
+
+"""
+aggregated selection of "identity"
+"""
+type IdentityAggregate {
+  aggregate: IdentityAggregateFields
+  nodes: [Identity!]!
+}
+
+"""
+aggregate fields of "identity"
+"""
+type IdentityAggregateFields {
+  count(columns: [IdentitySelectColumn!], distinct: Boolean): Int!
+  max: IdentityMaxFields
+  min: IdentityMinFields
+}
+
+"""
+order by aggregate values of table "identity"
+"""
+input IdentityAggregateOrderBy {
+  count: OrderBy
+  max: IdentityMaxOrderBy
+  min: IdentityMinOrderBy
+}
+
+"""
+append existing jsonb value of filtered columns with new jsonb value
+"""
+input IdentityAppendInput {
+  props: Jsonb
+}
+
+"""
+input type for inserting array relation for remote table "identity"
+"""
+input IdentityArrRelInsertInput {
+  data: [IdentityInsertInput!]!
+
+  """
+  on conflict condition
+  """
+  onConflict: IdentityOnConflict
+}
+
+"""
+Boolean expression to filter rows from the table "identity". All fields are combined with a logical 'AND'.
+"""
+input IdentityBoolExp {
+  _and: [IdentityBoolExp!]
+  _not: IdentityBoolExp
+  _or: [IdentityBoolExp!]
+  createdAt: TimestamptzComparisonExp
+  idp: IdpEnumComparisonExp
+  idpId: StringComparisonExp
+  props: JsonbComparisonExp
+  uid: UuidComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  user: UserBoolExp
+  userUid: UuidComparisonExp
+}
+
+"""
+unique or primary key constraints on table "identity"
+"""
+enum IdentityConstraint {
+  """
+  unique or primary key constraint
+  """
+  identityPkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input IdentityDeleteAtPathInput {
+  props: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input IdentityDeleteElemInput {
+  props: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input IdentityDeleteKeyInput {
+  props: String
+}
+
+"""
+input type for inserting data into table "identity"
+"""
+input IdentityInsertInput {
+  createdAt: Timestamptz
+  idp: IdpEnum
+  idpId: String
+  props: Jsonb
+  uid: Uuid
+  updatedAt: Timestamptz
+  user: UserObjRelInsertInput
+  userUid: Uuid
+}
+
+"""
+aggregate max on columns
+"""
+type IdentityMaxFields {
+  createdAt: Timestamptz
+  idpId: String
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+order by max() on columns of table "identity"
+"""
+input IdentityMaxOrderBy {
+  createdAt: OrderBy
+  idpId: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  userUid: OrderBy
+}
+
+"""
+aggregate min on columns
+"""
+type IdentityMinFields {
+  createdAt: Timestamptz
+  idpId: String
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+order by min() on columns of table "identity"
+"""
+input IdentityMinOrderBy {
+  createdAt: OrderBy
+  idpId: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  userUid: OrderBy
+}
+
+"""
+response of any mutation on the table "identity"
+"""
+type IdentityMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [Identity!]!
+}
+
+"""
+on conflict condition type for table "identity"
+"""
+input IdentityOnConflict {
+  constraint: IdentityConstraint!
+  updateColumns: [IdentityUpdateColumn!]! = []
+  where: IdentityBoolExp
+}
+
+"""
+Ordering options when selecting data from "identity".
+"""
+input IdentityOrderBy {
+  createdAt: OrderBy
+  idp: OrderBy
+  idpId: OrderBy
+  props: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  user: UserOrderBy
+  userUid: OrderBy
+}
+
+"""
+primary key columns input for table: identity
+"""
+input IdentityPkColumnsInput {
+  uid: Uuid!
+}
+
+"""
+prepend existing jsonb value of filtered columns with new jsonb value
+"""
+input IdentityPrependInput {
+  props: Jsonb
+}
+
+"""
+select columns of table "identity"
+"""
+enum IdentitySelectColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  idp
+
+  """
+  column name
+  """
+  idpId
+
+  """
+  column name
+  """
+  props
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  userUid
+}
+
+"""
+input type for updating data in table "identity"
+"""
+input IdentitySetInput {
+  createdAt: Timestamptz
+  idp: IdpEnum
+  idpId: String
+  props: Jsonb
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+update columns of table "identity"
+"""
+enum IdentityUpdateColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  idp
+
+  """
+  column name
+  """
+  idpId
+
+  """
+  column name
+  """
+  props
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  userUid
+}
+
+"""
+columns and relationships of "idp"
+"""
+type Idp implements Node {
+  comment: String
+  id: ID!
+
+  """
+  An array relationship
+  """
+  identities(
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdentitySelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdentityOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdentityBoolExp
+  ): [Identity!]!
+
+  """
+  An aggregate relationship
+  """
+  identitiesAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdentitySelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdentityOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdentityBoolExp
+  ): IdentityAggregate!
+
+  """
+  An array relationship connection
+  """
+  identitiesConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdentitySelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdentityOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdentityBoolExp
+  ): IdentityConnection!
+  value: String!
+}
+
+"""
+A Relay connection object on "idp"
+"""
+type IdpConnection {
+  edges: [IdpEdge!]!
+  pageInfo: PageInfo!
+}
+
+type IdpEdge {
+  cursor: String!
+  node: Idp!
+}
+
+"""
+Boolean expression to filter rows from the table "idp". All fields are combined with a logical 'AND'.
+"""
+input IdpBoolExp {
+  _and: [IdpBoolExp!]
+  _not: IdpBoolExp
+  _or: [IdpBoolExp!]
+  comment: StringComparisonExp
+  identities: IdentityBoolExp
+  value: StringComparisonExp
+}
+
+"""
+unique or primary key constraints on table "idp"
+"""
+enum IdpConstraint {
+  """
+  unique or primary key constraint
+  """
+  idpPkey
+}
+
+enum IdpEnum {
+  FACEBOOK
+  GOOGLE
+  KAKAO
+  NAVER
+}
+
+"""
+Boolean expression to compare columns of type "idp_enum". All fields are combined with logical 'AND'.
+"""
+input IdpEnumComparisonExp {
+  _eq: IdpEnum
+  _in: [IdpEnum!]
+  _isNull: Boolean
+  _neq: IdpEnum
+  _nin: [IdpEnum!]
+}
+
+"""
+input type for inserting data into table "idp"
+"""
+input IdpInsertInput {
+  comment: String
+  identities: IdentityArrRelInsertInput
+  value: String
+}
+
+"""
+response of any mutation on the table "idp"
+"""
+type IdpMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [Idp!]!
+}
+
+"""
+on conflict condition type for table "idp"
+"""
+input IdpOnConflict {
+  constraint: IdpConstraint!
+  updateColumns: [IdpUpdateColumn!]! = []
+  where: IdpBoolExp
+}
+
+"""
+Ordering options when selecting data from "idp".
+"""
+input IdpOrderBy {
+  comment: OrderBy
+  identitiesAggregate: IdentityAggregateOrderBy
+  value: OrderBy
+}
+
+"""
+primary key columns input for table: idp
+"""
+input IdpPkColumnsInput {
+  value: String!
+}
+
+"""
+select columns of table "idp"
+"""
+enum IdpSelectColumn {
+  """
+  column name
+  """
+  comment
+
+  """
+  column name
+  """
+  value
+}
+
+"""
+input type for updating data in table "idp"
+"""
+input IdpSetInput {
+  comment: String
+  value: String
+}
+
+"""
+update columns of table "idp"
+"""
+enum IdpUpdateColumn {
+  """
+  column name
+  """
+  comment
+
+  """
+  column name
+  """
+  value
+}
+
+scalar Jsonb
+
+"""
+Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'.
+"""
+input JsonbComparisonExp {
+  """
+  is the column contained in the given json value
+  """
+  _containedIn: Jsonb
+
+  """
+  does the column contain the given json value at the top level
+  """
+  _contains: Jsonb
+  _eq: Jsonb
+  _gt: Jsonb
+  _gte: Jsonb
+
+  """
+  does the string exist as a top-level key in the column
+  """
+  _hasKey: String
+
+  """
+  do all of these strings exist as top-level keys in the column
+  """
+  _hasKeysAll: [String!]
+
+  """
+  do any of these strings exist as top-level keys in the column
+  """
+  _hasKeysAny: [String!]
+  _in: [Jsonb!]
+  _isNull: Boolean
+  _lt: Jsonb
+  _lte: Jsonb
+  _neq: Jsonb
+  _nin: [Jsonb!]
+}
+
+"""
+column ordering options
+"""
+enum OrderBy {
+  """
+  in ascending order, nulls last
+  """
+  asc
+
+  """
+  in ascending order, nulls first
+  """
+  ascNullsFirst
+
+  """
+  in ascending order, nulls last
+  """
+  ascNullsLast
+
+  """
+  in descending order, nulls first
+  """
+  desc
+
+  """
+  in descending order, nulls first
+  """
+  descNullsFirst
+
+  """
+  in descending order, nulls last
+  """
+  descNullsLast
+}
+
+"""
+columns and relationships of "role"
+"""
+type Role implements Node {
+  comment: String
+  id: ID!
+  value: String!
+}
+
+"""
+A Relay connection object on "role"
+"""
+type RoleConnection {
+  edges: [RoleEdge!]!
+  pageInfo: PageInfo!
+}
+
+type RoleEdge {
+  cursor: String!
+  node: Role!
+}
+
+"""
+Boolean expression to filter rows from the table "role". All fields are combined with a logical 'AND'.
+"""
+input RoleBoolExp {
+  _and: [RoleBoolExp!]
+  _not: RoleBoolExp
+  _or: [RoleBoolExp!]
+  comment: StringComparisonExp
+  value: StringComparisonExp
+}
+
+"""
+unique or primary key constraints on table "role"
+"""
+enum RoleConstraint {
+  """
+  unique or primary key constraint
+  """
+  rolePkey
+}
+
+enum RoleEnum {
+  """
+  A role with every authorizations.
+  """
+  ADMIN
+
+  """
+  A role of any unauthenticated access.
+  """
+  ANONYMOUS
+
+  """
+  A role with some authorizations to manage service.
+  """
+  MANAGER
+
+  """
+  A role of service user.
+  """
+  USER
+}
+
+"""
+Boolean expression to compare columns of type "role_enum". All fields are combined with logical 'AND'.
+"""
+input RoleEnumComparisonExp {
+  _eq: RoleEnum
+  _in: [RoleEnum!]
+  _isNull: Boolean
+  _neq: RoleEnum
+  _nin: [RoleEnum!]
+}
+
+"""
+input type for inserting data into table "role"
+"""
+input RoleInsertInput {
+  comment: String
+  value: String
+}
+
+"""
+response of any mutation on the table "role"
+"""
+type RoleMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [Role!]!
+}
+
+"""
+on conflict condition type for table "role"
+"""
+input RoleOnConflict {
+  constraint: RoleConstraint!
+  updateColumns: [RoleUpdateColumn!]! = []
+  where: RoleBoolExp
+}
+
+"""
+Ordering options when selecting data from "role".
+"""
+input RoleOrderBy {
+  comment: OrderBy
+  value: OrderBy
+}
+
+"""
+primary key columns input for table: role
+"""
+input RolePkColumnsInput {
+  value: String!
+}
+
+"""
+select columns of table "role"
+"""
+enum RoleSelectColumn {
+  """
+  column name
+  """
+  comment
+
+  """
+  column name
+  """
+  value
+}
+
+"""
+input type for updating data in table "role"
+"""
+input RoleSetInput {
+  comment: String
+  value: String
+}
+
+"""
+update columns of table "role"
+"""
+enum RoleUpdateColumn {
+  """
+  column name
+  """
+  comment
+
+  """
+  column name
+  """
+  value
+}
+
+"""
+columns and relationships of "task"
+"""
+type Task implements Node {
+  createdAt: Timestamptz!
+  date: Date
+  id: ID!
+  isDone: Boolean!
+
+  """
+  An object relationship
+  """
+  taskGroup: TaskGroup!
+  taskGroupUid: Uuid!
+  time: Timetz
+  title: String!
+  uid: Uuid!
+  updatedAt: Timestamptz!
+}
+
+"""
+A Relay connection object on "task"
+"""
+type TaskConnection {
+  edges: [TaskEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TaskEdge {
+  cursor: String!
+  node: Task!
+}
+
+"""
+aggregated selection of "task"
+"""
+type TaskAggregate {
+  aggregate: TaskAggregateFields
+  nodes: [Task!]!
+}
+
+"""
+aggregate fields of "task"
+"""
+type TaskAggregateFields {
+  count(columns: [TaskSelectColumn!], distinct: Boolean): Int!
+  max: TaskMaxFields
+  min: TaskMinFields
+}
+
+"""
+order by aggregate values of table "task"
+"""
+input TaskAggregateOrderBy {
+  count: OrderBy
+  max: TaskMaxOrderBy
+  min: TaskMinOrderBy
+}
+
+"""
+input type for inserting array relation for remote table "task"
+"""
+input TaskArrRelInsertInput {
+  data: [TaskInsertInput!]!
+
+  """
+  on conflict condition
+  """
+  onConflict: TaskOnConflict
+}
+
+"""
+Boolean expression to filter rows from the table "task". All fields are combined with a logical 'AND'.
+"""
+input TaskBoolExp {
+  _and: [TaskBoolExp!]
+  _not: TaskBoolExp
+  _or: [TaskBoolExp!]
+  createdAt: TimestamptzComparisonExp
+  date: DateComparisonExp
+  isDone: BooleanComparisonExp
+  taskGroup: TaskGroupBoolExp
+  taskGroupUid: UuidComparisonExp
+  time: TimetzComparisonExp
+  title: StringComparisonExp
+  uid: UuidComparisonExp
+  updatedAt: TimestamptzComparisonExp
+}
+
+"""
+unique or primary key constraints on table "task"
+"""
+enum TaskConstraint {
+  """
+  unique or primary key constraint
+  """
+  taskPkey
+}
+
+"""
+columns and relationships of "task_group"
+"""
+type TaskGroup implements Node {
+  color: Bigint!
+  createdAt: Timestamptz!
+  id: ID!
+
+  """
+  An array relationship
+  """
+  tasks(
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskBoolExp
+  ): [Task!]!
+
+  """
+  An aggregate relationship
+  """
+  tasksAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskBoolExp
+  ): TaskAggregate!
+
+  """
+  An array relationship connection
+  """
+  tasksConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskBoolExp
+  ): TaskConnection!
+  title: String!
+  uid: Uuid!
+  updatedAt: Timestamptz!
+
+  """
+  An object relationship
+  """
+  user: User!
+  userUid: Uuid!
+}
+
+"""
+A Relay connection object on "task_group"
+"""
+type TaskGroupConnection {
+  edges: [TaskGroupEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TaskGroupEdge {
+  cursor: String!
+  node: TaskGroup!
+}
+
+"""
+aggregated selection of "task_group"
+"""
+type TaskGroupAggregate {
+  aggregate: TaskGroupAggregateFields
+  nodes: [TaskGroup!]!
+}
+
+"""
+aggregate fields of "task_group"
+"""
+type TaskGroupAggregateFields {
+  avg: TaskGroupAvgFields
+  count(columns: [TaskGroupSelectColumn!], distinct: Boolean): Int!
+  max: TaskGroupMaxFields
+  min: TaskGroupMinFields
+  stddev: TaskGroupStddevFields
+  stddevPop: TaskGroupStddevPopFields
+  stddevSamp: TaskGroupStddevSampFields
+  sum: TaskGroupSumFields
+  varPop: TaskGroupVarPopFields
+  varSamp: TaskGroupVarSampFields
+  variance: TaskGroupVarianceFields
+}
+
+"""
+order by aggregate values of table "task_group"
+"""
+input TaskGroupAggregateOrderBy {
+  avg: TaskGroupAvgOrderBy
+  count: OrderBy
+  max: TaskGroupMaxOrderBy
+  min: TaskGroupMinOrderBy
+  stddev: TaskGroupStddevOrderBy
+  stddevPop: TaskGroupStddevPopOrderBy
+  stddevSamp: TaskGroupStddevSampOrderBy
+  sum: TaskGroupSumOrderBy
+  varPop: TaskGroupVarPopOrderBy
+  varSamp: TaskGroupVarSampOrderBy
+  variance: TaskGroupVarianceOrderBy
+}
+
+"""
+input type for inserting array relation for remote table "task_group"
+"""
+input TaskGroupArrRelInsertInput {
+  data: [TaskGroupInsertInput!]!
+
+  """
+  on conflict condition
+  """
+  onConflict: TaskGroupOnConflict
+}
+
+"""
+aggregate avg on columns
+"""
+type TaskGroupAvgFields {
+  color: Float
+}
+
+"""
+order by avg() on columns of table "task_group"
+"""
+input TaskGroupAvgOrderBy {
+  color: OrderBy
+}
+
+"""
+Boolean expression to filter rows from the table "task_group". All fields are combined with a logical 'AND'.
+"""
+input TaskGroupBoolExp {
+  _and: [TaskGroupBoolExp!]
+  _not: TaskGroupBoolExp
+  _or: [TaskGroupBoolExp!]
+  color: BigintComparisonExp
+  createdAt: TimestamptzComparisonExp
+  tasks: TaskBoolExp
+  title: StringComparisonExp
+  uid: UuidComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  user: UserBoolExp
+  userUid: UuidComparisonExp
+}
+
+"""
+unique or primary key constraints on table "task_group"
+"""
+enum TaskGroupConstraint {
+  """
+  unique or primary key constraint
+  """
+  taskGroupPkey
+}
+
+"""
+input type for incrementing numeric columns in table "task_group"
+"""
+input TaskGroupIncInput {
+  color: Bigint
+}
+
+"""
+input type for inserting data into table "task_group"
+"""
+input TaskGroupInsertInput {
+  color: Bigint
+  createdAt: Timestamptz
+  tasks: TaskArrRelInsertInput
+  title: String
+  uid: Uuid
+  updatedAt: Timestamptz
+  user: UserObjRelInsertInput
+  userUid: Uuid
+}
+
+"""
+aggregate max on columns
+"""
+type TaskGroupMaxFields {
+  color: Bigint
+  createdAt: Timestamptz
+  title: String
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+order by max() on columns of table "task_group"
+"""
+input TaskGroupMaxOrderBy {
+  color: OrderBy
+  createdAt: OrderBy
+  title: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  userUid: OrderBy
+}
+
+"""
+aggregate min on columns
+"""
+type TaskGroupMinFields {
+  color: Bigint
+  createdAt: Timestamptz
+  title: String
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+order by min() on columns of table "task_group"
+"""
+input TaskGroupMinOrderBy {
+  color: OrderBy
+  createdAt: OrderBy
+  title: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  userUid: OrderBy
+}
+
+"""
+response of any mutation on the table "task_group"
+"""
+type TaskGroupMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [TaskGroup!]!
+}
+
+"""
+input type for inserting object relation for remote table "task_group"
+"""
+input TaskGroupObjRelInsertInput {
+  data: TaskGroupInsertInput!
+
+  """
+  on conflict condition
+  """
+  onConflict: TaskGroupOnConflict
+}
+
+"""
+on conflict condition type for table "task_group"
+"""
+input TaskGroupOnConflict {
+  constraint: TaskGroupConstraint!
+  updateColumns: [TaskGroupUpdateColumn!]! = []
+  where: TaskGroupBoolExp
+}
+
+"""
+Ordering options when selecting data from "task_group".
+"""
+input TaskGroupOrderBy {
+  color: OrderBy
+  createdAt: OrderBy
+  tasksAggregate: TaskAggregateOrderBy
+  title: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  user: UserOrderBy
+  userUid: OrderBy
+}
+
+"""
+primary key columns input for table: task_group
+"""
+input TaskGroupPkColumnsInput {
+  uid: Uuid!
+}
+
+"""
+select columns of table "task_group"
+"""
+enum TaskGroupSelectColumn {
+  """
+  column name
+  """
+  color
+
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  title
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  userUid
+}
+
+"""
+input type for updating data in table "task_group"
+"""
+input TaskGroupSetInput {
+  color: Bigint
+  createdAt: Timestamptz
+  title: String
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+aggregate stddev on columns
+"""
+type TaskGroupStddevFields {
+  color: Float
+}
+
+"""
+order by stddev() on columns of table "task_group"
+"""
+input TaskGroupStddevOrderBy {
+  color: OrderBy
+}
+
+"""
+aggregate stddev_pop on columns
+"""
+type TaskGroupStddevPopFields {
+  color: Float
+}
+
+"""
+order by stddev_pop() on columns of table "task_group"
+"""
+input TaskGroupStddevPopOrderBy {
+  color: OrderBy
+}
+
+"""
+aggregate stddev_samp on columns
+"""
+type TaskGroupStddevSampFields {
+  color: Float
+}
+
+"""
+order by stddev_samp() on columns of table "task_group"
+"""
+input TaskGroupStddevSampOrderBy {
+  color: OrderBy
+}
+
+"""
+aggregate sum on columns
+"""
+type TaskGroupSumFields {
+  color: Bigint
+}
+
+"""
+order by sum() on columns of table "task_group"
+"""
+input TaskGroupSumOrderBy {
+  color: OrderBy
+}
+
+"""
+update columns of table "task_group"
+"""
+enum TaskGroupUpdateColumn {
+  """
+  column name
+  """
+  color
+
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  title
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  userUid
+}
+
+"""
+aggregate var_pop on columns
+"""
+type TaskGroupVarPopFields {
+  color: Float
+}
+
+"""
+order by var_pop() on columns of table "task_group"
+"""
+input TaskGroupVarPopOrderBy {
+  color: OrderBy
+}
+
+"""
+aggregate var_samp on columns
+"""
+type TaskGroupVarSampFields {
+  color: Float
+}
+
+"""
+order by var_samp() on columns of table "task_group"
+"""
+input TaskGroupVarSampOrderBy {
+  color: OrderBy
+}
+
+"""
+aggregate variance on columns
+"""
+type TaskGroupVarianceFields {
+  color: Float
+}
+
+"""
+order by variance() on columns of table "task_group"
+"""
+input TaskGroupVarianceOrderBy {
+  color: OrderBy
+}
+
+"""
+input type for inserting data into table "task"
+"""
+input TaskInsertInput {
+  createdAt: Timestamptz
+  date: Date
+  isDone: Boolean
+  taskGroup: TaskGroupObjRelInsertInput
+  taskGroupUid: Uuid
+  time: Timetz
+  title: String
+  uid: Uuid
+  updatedAt: Timestamptz
+}
+
+"""
+aggregate max on columns
+"""
+type TaskMaxFields {
+  createdAt: Timestamptz
+  date: Date
+  taskGroupUid: Uuid
+  time: Timetz
+  title: String
+  uid: Uuid
+  updatedAt: Timestamptz
+}
+
+"""
+order by max() on columns of table "task"
+"""
+input TaskMaxOrderBy {
+  createdAt: OrderBy
+  date: OrderBy
+  taskGroupUid: OrderBy
+  time: OrderBy
+  title: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+}
+
+"""
+aggregate min on columns
+"""
+type TaskMinFields {
+  createdAt: Timestamptz
+  date: Date
+  taskGroupUid: Uuid
+  time: Timetz
+  title: String
+  uid: Uuid
+  updatedAt: Timestamptz
+}
+
+"""
+order by min() on columns of table "task"
+"""
+input TaskMinOrderBy {
+  createdAt: OrderBy
+  date: OrderBy
+  taskGroupUid: OrderBy
+  time: OrderBy
+  title: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+}
+
+"""
+response of any mutation on the table "task"
+"""
+type TaskMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [Task!]!
+}
+
+"""
+on conflict condition type for table "task"
+"""
+input TaskOnConflict {
+  constraint: TaskConstraint!
+  updateColumns: [TaskUpdateColumn!]! = []
+  where: TaskBoolExp
+}
+
+"""
+Ordering options when selecting data from "task".
+"""
+input TaskOrderBy {
+  createdAt: OrderBy
+  date: OrderBy
+  isDone: OrderBy
+  taskGroup: TaskGroupOrderBy
+  taskGroupUid: OrderBy
+  time: OrderBy
+  title: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+}
+
+"""
+primary key columns input for table: task
+"""
+input TaskPkColumnsInput {
+  uid: Uuid!
+}
+
+"""
+select columns of table "task"
+"""
+enum TaskSelectColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  date
+
+  """
+  column name
+  """
+  isDone
+
+  """
+  column name
+  """
+  taskGroupUid
+
+  """
+  column name
+  """
+  time
+
+  """
+  column name
+  """
+  title
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+}
+
+"""
+input type for updating data in table "task"
+"""
+input TaskSetInput {
+  createdAt: Timestamptz
+  date: Date
+  isDone: Boolean
+  taskGroupUid: Uuid
+  time: Timetz
+  title: String
+  uid: Uuid
+  updatedAt: Timestamptz
+}
+
+"""
+update columns of table "task"
+"""
+enum TaskUpdateColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  date
+
+  """
+  column name
+  """
+  isDone
+
+  """
+  column name
+  """
+  taskGroupUid
+
+  """
+  column name
+  """
+  time
+
+  """
+  column name
+  """
+  title
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+}
+
+scalar Timestamptz
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input TimestamptzComparisonExp {
+  _eq: Timestamptz
+  _gt: Timestamptz
+  _gte: Timestamptz
+  _in: [Timestamptz!]
+  _isNull: Boolean
+  _lt: Timestamptz
+  _lte: Timestamptz
+  _neq: Timestamptz
+  _nin: [Timestamptz!]
+}
+
+scalar Timetz
+
+"""
+Boolean expression to compare columns of type "timetz". All fields are combined with logical 'AND'.
+"""
+input TimetzComparisonExp {
+  _eq: Timetz
+  _gt: Timetz
+  _gte: Timetz
+  _in: [Timetz!]
+  _isNull: Boolean
+  _lt: Timetz
+  _lte: Timetz
+  _neq: Timetz
+  _nin: [Timetz!]
+}
+
+"""
+columns and relationships of "user"
+"""
+type User implements Node {
+  createdAt: Timestamptz!
+  id: ID!
+
+  """
+  An array relationship
+  """
+  identities(
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdentitySelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdentityOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdentityBoolExp
+  ): [Identity!]!
+
+  """
+  An aggregate relationship
+  """
+  identitiesAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdentitySelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdentityOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdentityBoolExp
+  ): IdentityAggregate!
+
+  """
+  An array relationship connection
+  """
+  identitiesConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [IdentitySelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [IdentityOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: IdentityBoolExp
+  ): IdentityConnection!
+  name: String!
+
+  """
+  An array relationship
+  """
+  roles(
+    """
+    distinct select on columns
+    """
+    distinctOn: [UserToRoleSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [UserToRoleOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: UserToRoleBoolExp
+  ): [UserToRole!]!
+
+  """
+  An aggregate relationship
+  """
+  rolesAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [UserToRoleSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [UserToRoleOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: UserToRoleBoolExp
+  ): UserToRoleAggregate!
+
+  """
+  An array relationship connection
+  """
+  rolesConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [UserToRoleSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [UserToRoleOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: UserToRoleBoolExp
+  ): UserToRoleConnection!
+
+  """
+  An array relationship
+  """
+  taskGroups(
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskGroupSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskGroupOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskGroupBoolExp
+  ): [TaskGroup!]!
+
+  """
+  An aggregate relationship
+  """
+  taskGroupsAggregate(
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskGroupSelectColumn!]
+
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskGroupOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskGroupBoolExp
+  ): TaskGroupAggregate!
+
+  """
+  An array relationship connection
+  """
+  taskGroupsConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [TaskGroupSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [TaskGroupOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: TaskGroupBoolExp
+  ): TaskGroupConnection!
+  uid: Uuid!
+  updatedAt: Timestamptz!
+}
+
+"""
+A Relay connection object on "user"
+"""
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User!
+}
+
+"""
+Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'.
+"""
+input UserBoolExp {
+  _and: [UserBoolExp!]
+  _not: UserBoolExp
+  _or: [UserBoolExp!]
+  createdAt: TimestamptzComparisonExp
+  identities: IdentityBoolExp
+  name: StringComparisonExp
+  roles: UserToRoleBoolExp
+  taskGroups: TaskGroupBoolExp
+  uid: UuidComparisonExp
+  updatedAt: TimestamptzComparisonExp
+}
+
+"""
+unique or primary key constraints on table "user"
+"""
+enum UserConstraint {
+  """
+  unique or primary key constraint
+  """
+  userPkey
+}
+
+"""
+input type for inserting data into table "user"
+"""
+input UserInsertInput {
+  createdAt: Timestamptz
+  identities: IdentityArrRelInsertInput
+  name: String
+  roles: UserToRoleArrRelInsertInput
+  taskGroups: TaskGroupArrRelInsertInput
+  uid: Uuid
+  updatedAt: Timestamptz
+}
+
+"""
+response of any mutation on the table "user"
+"""
+type UserMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [User!]!
+}
+
+"""
+input type for inserting object relation for remote table "user"
+"""
+input UserObjRelInsertInput {
+  data: UserInsertInput!
+
+  """
+  on conflict condition
+  """
+  onConflict: UserOnConflict
+}
+
+"""
+on conflict condition type for table "user"
+"""
+input UserOnConflict {
+  constraint: UserConstraint!
+  updateColumns: [UserUpdateColumn!]! = []
+  where: UserBoolExp
+}
+
+"""
+Ordering options when selecting data from "user".
+"""
+input UserOrderBy {
+  createdAt: OrderBy
+  identitiesAggregate: IdentityAggregateOrderBy
+  name: OrderBy
+  rolesAggregate: UserToRoleAggregateOrderBy
+  taskGroupsAggregate: TaskGroupAggregateOrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+}
+
+"""
+primary key columns input for table: user
+"""
+input UserPkColumnsInput {
+  uid: Uuid!
+}
+
+"""
+select columns of table "user"
+"""
+enum UserSelectColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  name
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+}
+
+"""
+input type for updating data in table "user"
+"""
+input UserSetInput {
+  createdAt: Timestamptz
+  name: String
+  uid: Uuid
+  updatedAt: Timestamptz
+}
+
+"""
+columns and relationships of "user_to_role"
+"""
+type UserToRole implements Node {
+  createdAt: Timestamptz!
+  id: ID!
+  role: RoleEnum!
+  uid: Uuid!
+  updatedAt: Timestamptz!
+  userUid: Uuid!
+}
+
+"""
+A Relay connection object on "user_to_role"
+"""
+type UserToRoleConnection {
+  edges: [UserToRoleEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UserToRoleEdge {
+  cursor: String!
+  node: UserToRole!
+}
+
+"""
+aggregated selection of "user_to_role"
+"""
+type UserToRoleAggregate {
+  aggregate: UserToRoleAggregateFields
+  nodes: [UserToRole!]!
+}
+
+"""
+aggregate fields of "user_to_role"
+"""
+type UserToRoleAggregateFields {
+  count(columns: [UserToRoleSelectColumn!], distinct: Boolean): Int!
+  max: UserToRoleMaxFields
+  min: UserToRoleMinFields
+}
+
+"""
+order by aggregate values of table "user_to_role"
+"""
+input UserToRoleAggregateOrderBy {
+  count: OrderBy
+  max: UserToRoleMaxOrderBy
+  min: UserToRoleMinOrderBy
+}
+
+"""
+input type for inserting array relation for remote table "user_to_role"
+"""
+input UserToRoleArrRelInsertInput {
+  data: [UserToRoleInsertInput!]!
+
+  """
+  on conflict condition
+  """
+  onConflict: UserToRoleOnConflict
+}
+
+"""
+Boolean expression to filter rows from the table "user_to_role". All fields are combined with a logical 'AND'.
+"""
+input UserToRoleBoolExp {
+  _and: [UserToRoleBoolExp!]
+  _not: UserToRoleBoolExp
+  _or: [UserToRoleBoolExp!]
+  createdAt: TimestamptzComparisonExp
+  role: RoleEnumComparisonExp
+  uid: UuidComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  userUid: UuidComparisonExp
+}
+
+"""
+unique or primary key constraints on table "user_to_role"
+"""
+enum UserToRoleConstraint {
+  """
+  unique or primary key constraint
+  """
+  userRolePkey
+}
+
+"""
+input type for inserting data into table "user_to_role"
+"""
+input UserToRoleInsertInput {
+  createdAt: Timestamptz
+  role: RoleEnum
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+aggregate max on columns
+"""
+type UserToRoleMaxFields {
+  createdAt: Timestamptz
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+order by max() on columns of table "user_to_role"
+"""
+input UserToRoleMaxOrderBy {
+  createdAt: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  userUid: OrderBy
+}
+
+"""
+aggregate min on columns
+"""
+type UserToRoleMinFields {
+  createdAt: Timestamptz
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+order by min() on columns of table "user_to_role"
+"""
+input UserToRoleMinOrderBy {
+  createdAt: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  userUid: OrderBy
+}
+
+"""
+response of any mutation on the table "user_to_role"
+"""
+type UserToRoleMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [UserToRole!]!
+}
+
+"""
+on conflict condition type for table "user_to_role"
+"""
+input UserToRoleOnConflict {
+  constraint: UserToRoleConstraint!
+  updateColumns: [UserToRoleUpdateColumn!]! = []
+  where: UserToRoleBoolExp
+}
+
+"""
+Ordering options when selecting data from "user_to_role".
+"""
+input UserToRoleOrderBy {
+  createdAt: OrderBy
+  role: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  userUid: OrderBy
+}
+
+"""
+primary key columns input for table: user_to_role
+"""
+input UserToRolePkColumnsInput {
+  uid: Uuid!
+}
+
+"""
+select columns of table "user_to_role"
+"""
+enum UserToRoleSelectColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  role
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  userUid
+}
+
+"""
+input type for updating data in table "user_to_role"
+"""
+input UserToRoleSetInput {
+  createdAt: Timestamptz
+  role: RoleEnum
+  uid: Uuid
+  updatedAt: Timestamptz
+  userUid: Uuid
+}
+
+"""
+update columns of table "user_to_role"
+"""
+enum UserToRoleUpdateColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  role
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  userUid
+}
+
+"""
+update columns of table "user"
+"""
+enum UserUpdateColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  name
+
+  """
+  column name
+  """
+  uid
+
+  """
+  column name
+  """
+  updatedAt
+}
+
+scalar Uuid
+
+"""
+Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
+"""
+input UuidComparisonExp {
+  _eq: Uuid
+  _gt: Uuid
+  _gte: Uuid
+  _in: [Uuid!]
+  _isNull: Boolean
+  _lt: Uuid
+  _lte: Uuid
+  _neq: Uuid
+  _nin: [Uuid!]
+}
+
+input SignInOrUpInput {
+  code: String!
+  idp: IdpEnum!
+}
+
+enum SignInOrUpResult {
+  SIGN_UP
+  SIGN_IN
+}
+
+type SignInOrUpMPayload {
+  result: SignInOrUpResult!
+  id: ID
+  accessToken: String!
+}

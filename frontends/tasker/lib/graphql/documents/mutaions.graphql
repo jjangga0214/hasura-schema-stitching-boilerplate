@@ -1,0 +1,7 @@
+mutation signInOrUp($signInOrUpInput: SignInOrUpInput) {
+  signInOrUp(input: $signInOrUpInput) {
+    accessToken
+    id
+    result
+  }
+}
