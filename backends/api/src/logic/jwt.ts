@@ -10,7 +10,7 @@ const publicKey = fs.readFileSync(process.env.JWT_PUBLIC_KEY_PATH as string, {
 })
 
 export enum TokenKind {
-  USER,
+  HUMAN,
   SERVICE_ACCOUNT,
 }
 
@@ -64,7 +64,7 @@ export function verify<T extends { [key: string]: any } = TokenPayload>(
 export function createUserAccessToken(user: GqlUser, options?: SignOptions) {
   return sign({
     exp: Math.floor(Date.now() / 1000) + 1 * 60 * 60, // expires in an hours
-    kind: TokenKind.USER,
+    kind: TokenKind.HUMAN,
     user: {
       id: user.id, // Relay spec `id` (type: ID)
       uid: user.uid,
@@ -74,8 +74,13 @@ export function createUserAccessToken(user: GqlUser, options?: SignOptions) {
     version: 1,
     // TODO jwt registerd claims
     'https://hasura.io/jwt/claims': {
-      'x-hasura-allowed-roles': user.roles.map((r) => r.role.toLowerCase()),
-      'x-hasura-default-role': 'anonymous',
+      'x-hasura-allowed-roles': user.roles
+        .map((r) => r.role.toLowerCase())
+        .concat('anonymous'),
+      // TODO: manage priorities in database
+      'x-hasura-default-role': ['ADMIN', 'MANAGER', 'USER']
+        .filter((role) => user.roles.map((r) => r.role).includes(role))[0]
+        .toLowerCase(),
       'x-hasura-user-uid': user.uid, // CAUTION: Be careful! It's not Relay spec `id` (type: ID), but `_id` (type: uuid), prefixed by `_`.
     },
     ...options,
