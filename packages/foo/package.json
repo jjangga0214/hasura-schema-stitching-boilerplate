@@ -1,6 +1,6 @@
 {
   "name": "@jjangga0214/foo",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "private": true,
   "main": "dist/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@jjangga0214/bar",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "private": true,
   "main": "dist/index.js",
@@ -24,6 +24,6 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@jjangga0214/foo": "^1.0.0"
+    "@jjangga0214/foo": "0.0.1"
   }
 }
