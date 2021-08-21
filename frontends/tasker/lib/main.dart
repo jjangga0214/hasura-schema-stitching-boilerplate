@@ -3,6 +3,7 @@ import 'package:kakao_flutter_sdk/common.dart'; // import utility methods
 import 'package:kakao_flutter_sdk/user.dart'; // must be imported if version is 0.6.4 or higher
 import 'package:kakao_flutter_sdk/auth.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:get/get.dart';
 import 'generated/env.dart';
 import 'graphql/client.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GraphQLProvider(
       client: createGraphQLClient(),
-      child: MaterialApp(
+      child: GetMaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           // This is the theme of your application.
