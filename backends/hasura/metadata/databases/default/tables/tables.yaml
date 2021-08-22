@@ -1,5 +1,6 @@
 - "!include public_identity.yaml"
 - "!include public_idp.yaml"
+- "!include public_platform.yaml"
 - "!include public_role.yaml"
 - "!include public_task.yaml"
 - "!include public_task_group.yaml"
