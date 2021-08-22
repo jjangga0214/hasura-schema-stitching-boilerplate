@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import '../generated/graphql.dart';
 import '../controllers/main.dart';
+import 'login.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -42,6 +46,36 @@ class HomePage extends StatelessWidget {
                 '${c.counter}',
                 style: Theme.of(context).textTheme.headline4,
               ),
+            ),
+            Query(
+              options: QueryOptions(
+                document:
+                    PING_QUERY_DOCUMENT, // this is the query string you just created
+                pollInterval: Duration(seconds: 1),
+              ),
+              // Just like in apollo refetch() could be used to manually trigger a refetch
+              // while fetchMore() can be used for pagination purpose
+              builder: (QueryResult result,
+                  {VoidCallback? refetch, FetchMore? fetchMore}) {
+                if (result.hasException) {
+                  return Text(result.exception.toString());
+                }
+
+                if (result.isLoading) {
+                  return Text('Loading');
+                }
+
+                final payload = Ping$Query.fromJson(result.data!).ping;
+                return Text('ping query 결과(pollInterval: 1초)\n $payload');
+              },
+            ),
+            OutlinedButton(
+              child: Text('로그아웃'),
+              onPressed: () async {
+                final storage = new FlutterSecureStorage();
+                await storage.delete(key: 'accessToken');
+                Get.off(LoginPage());
+              },
             )
           ],
         ),

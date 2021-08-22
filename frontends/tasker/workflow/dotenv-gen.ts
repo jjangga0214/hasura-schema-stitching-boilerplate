@@ -37,6 +37,8 @@ interface Target {
 }
 
 for (const { filename, validate } of [
+  // Order is important
+  { filename: path.join(__dirname, '..', '.env'), validate: () => true },
   {
     filename: path.join(__dirname, '..', '..', '..', '.env'),
     validate: (key) =>
@@ -47,7 +49,6 @@ for (const { filename, validate } of [
         'API_ENDPOINT_PATH_GRAPHQL',
       ].includes(key),
   },
-  { filename: path.join(__dirname, '..', '.env'), validate: () => true },
 ] as Target[]) {
   const result = dotenv.config({
     path: filename,
@@ -61,7 +62,10 @@ for (const { filename, validate } of [
   for (const key in parsed) {
     if (Object.prototype.hasOwnProperty.call(parsed, key)) {
       let value: string | boolean | number = parsed[key]
-      value = parseInt(value, 10) || value
+      if (value.split('.').length <= 2) {
+        // e.g. IP address 192.168.0.5
+        value = parseInt(value, 10) || value
+      }
       if (value === 'true') {
         value = true
       } else if (value === 'false') {

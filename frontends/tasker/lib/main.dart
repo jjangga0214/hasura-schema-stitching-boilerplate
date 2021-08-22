@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kakao_flutter_sdk/common.dart'; // import utility methods
 import 'package:kakao_flutter_sdk/user.dart'; // must be imported if version is 0.6.4 or higher
 import 'package:kakao_flutter_sdk/auth.dart';
@@ -10,13 +11,23 @@ import 'pages/home.dart';
 import 'generated/env.dart';
 import 'graphql/client.dart';
 
-void main() {
+void main() async {
   KakaoContext.clientId = TASKER_OAUTH2_KAKAO_CLIENT_ID;
-  runApp(MyApp());
+  final storage = new FlutterSecureStorage();
+  String? accessToken = null;
+  try {
+    accessToken = await storage.read(key: 'accessToken');
+  } catch (e) {}
+  runApp(MyApp(
+    isLogined: accessToken != null,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({required this.isLogined, Key? key}) : super(key: key);
   // This widget is the root of your application.
+  final bool isLogined;
+
   @override
   Widget build(BuildContext context) {
     Get.put(MainController());
@@ -36,7 +47,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: true ? LoginPage() : HomePage(),
+        home: this.isLogined ? LoginPage() : HomePage(),
       ),
     );
   }

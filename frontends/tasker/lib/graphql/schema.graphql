@@ -56,6 +56,31 @@ type Query {
   ): Node
 
   """
+  fetch data from the table: "platform"
+  """
+  platformConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [PlatformSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [PlatformOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: PlatformBoolExp
+  ): PlatformConnection!
+
+  """
   fetch data from the table: "role"
   """
   roleConnection(
@@ -214,6 +239,21 @@ type Mutation {
   deleteIdpByPk(value: String!): Idp
 
   """
+  delete data from the table: "platform"
+  """
+  deletePlatform(
+    """
+    filter the rows which have to be deleted
+    """
+    where: PlatformBoolExp!
+  ): PlatformMutationResponse
+
+  """
+  delete single row from the table: "platform"
+  """
+  deletePlatformByPk(value: String!): Platform
+
+  """
   delete data from the table: "role"
   """
   deleteRole(
@@ -347,6 +387,36 @@ type Mutation {
     """
     onConflict: IdpOnConflict
   ): Idp
+
+  """
+  insert data into the table: "platform"
+  """
+  insertPlatform(
+    """
+    the rows to be inserted
+    """
+    objects: [PlatformInsertInput!]!
+
+    """
+    on conflict condition
+    """
+    onConflict: PlatformOnConflict
+  ): PlatformMutationResponse
+
+  """
+  insert a single row into the table: "platform"
+  """
+  insertPlatformOne(
+    """
+    the row to be inserted
+    """
+    object: PlatformInsertInput!
+
+    """
+    on conflict condition
+    """
+    onConflict: PlatformOnConflict
+  ): Platform
 
   """
   insert data into the table: "role"
@@ -601,6 +671,32 @@ type Mutation {
   ): Idp
 
   """
+  update data of the table: "platform"
+  """
+  updatePlatform(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: PlatformSetInput
+
+    """
+    filter the rows which have to be updated
+    """
+    where: PlatformBoolExp!
+  ): PlatformMutationResponse
+
+  """
+  update single row of the table: "platform"
+  """
+  updatePlatformByPk(
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: PlatformSetInput
+    pkColumns: PlatformPkColumnsInput!
+  ): Platform
+
+  """
   update data of the table: "role"
   """
   updateRole(
@@ -798,6 +894,31 @@ type Subscription {
     """
     id: ID!
   ): Node
+
+  """
+  fetch data from the table: "platform"
+  """
+  platformConnection(
+    after: String
+    before: String
+
+    """
+    distinct select on columns
+    """
+    distinctOn: [PlatformSelectColumn!]
+    first: Int
+    last: Int
+
+    """
+    sort the rows by one or more columns
+    """
+    orderBy: [PlatformOrderBy!]
+
+    """
+    filter the rows returned
+    """
+    where: PlatformBoolExp
+  ): PlatformConnection!
 
   """
   fetch data from the table: "role"
@@ -1697,6 +1818,134 @@ enum OrderBy {
   in descending order, nulls last
   """
   descNullsLast
+}
+
+"""
+columns and relationships of "platform"
+"""
+type Platform implements Node {
+  comment: String
+  id: ID!
+  value: String!
+}
+
+"""
+A Relay connection object on "platform"
+"""
+type PlatformConnection {
+  edges: [PlatformEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PlatformEdge {
+  cursor: String!
+  node: Platform!
+}
+
+"""
+Boolean expression to filter rows from the table "platform". All fields are combined with a logical 'AND'.
+"""
+input PlatformBoolExp {
+  _and: [PlatformBoolExp!]
+  _not: PlatformBoolExp
+  _or: [PlatformBoolExp!]
+  comment: StringComparisonExp
+  value: StringComparisonExp
+}
+
+"""
+unique or primary key constraints on table "platform"
+"""
+enum PlatformConstraint {
+  """
+  unique or primary key constraint
+  """
+  platformPkey
+}
+
+"""
+input type for inserting data into table "platform"
+"""
+input PlatformInsertInput {
+  comment: String
+  value: String
+}
+
+"""
+response of any mutation on the table "platform"
+"""
+type PlatformMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [Platform!]!
+}
+
+"""
+on conflict condition type for table "platform"
+"""
+input PlatformOnConflict {
+  constraint: PlatformConstraint!
+  updateColumns: [PlatformUpdateColumn!]! = []
+  where: PlatformBoolExp
+}
+
+"""
+Ordering options when selecting data from "platform".
+"""
+input PlatformOrderBy {
+  comment: OrderBy
+  value: OrderBy
+}
+
+"""
+primary key columns input for table: platform
+"""
+input PlatformPkColumnsInput {
+  value: String!
+}
+
+"""
+select columns of table "platform"
+"""
+enum PlatformSelectColumn {
+  """
+  column name
+  """
+  comment
+
+  """
+  column name
+  """
+  value
+}
+
+"""
+input type for updating data in table "platform"
+"""
+input PlatformSetInput {
+  comment: String
+  value: String
+}
+
+"""
+update columns of table "platform"
+"""
+enum PlatformUpdateColumn {
+  """
+  column name
+  """
+  comment
+
+  """
+  column name
+  """
+  value
 }
 
 """
@@ -3432,6 +3681,13 @@ input UuidComparisonExp {
 input SignInOrUpInput {
   code: String!
   idp: IdpEnum!
+  platform: PlatformEnum!
+}
+
+enum PlatformEnum {
+  ANDROID
+  IOS
+  WEB
 }
 
 enum SignInOrUpResult {
@@ -3440,7 +3696,7 @@ enum SignInOrUpResult {
 }
 
 type SignInOrUpMPayload {
-  result: SignInOrUpResult!
   id: ID
   accessToken: String!
+  result: SignInOrUpResult!
 }

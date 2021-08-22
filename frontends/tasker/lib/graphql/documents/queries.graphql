@@ -19,3 +19,7 @@ query getTaskGroupsAndTasks {
     }
   }
 }
+
+query ping {
+  ping
+}
