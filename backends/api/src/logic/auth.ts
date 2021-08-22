@@ -47,7 +47,8 @@ const gqlIdentityUserQuery = gql`
 
 interface SignInOrUpOptions {
   code: string
-  idp: string
+  idp: 'GOOGLE' | 'FACEBOOK' | 'KAKAO' | 'NAVER'
+  platform: 'ANDROID' | 'IOS' | 'WEB'
 }
 
 /**
@@ -56,24 +57,36 @@ interface SignInOrUpOptions {
  *   - if identifyUser fails
  *   - if insertUser fails
  */
-export async function signInOrUp({ code, idp }: SignInOrUpOptions) {
-  const oauth2Client = (() => {
-    switch (idp) {
-      case 'GOOGLE':
-        return google
-      case 'FACEBOOK':
-        return facebook
-      case 'NAVER':
-        return naver
-      case 'KAKAO':
-        return kakao
-      default:
-        throw new Error('idp is invalid')
+export async function signInOrUp({ code, idp, platform }: SignInOrUpOptions) {
+  const taskerBaseEndpoint = `${process.env.TASKER_ENDPOINT_SCHEME}://${process.env.TASKER_ENDPOINT_IP}:${process.env.TASKER_ENDPOINT_PORT}`
+  const userInfo = await (async () => {
+    if (idp === 'GOOGLE') {
+      const redirectUri = `${taskerBaseEndpoint}/oauth2/callback/google`
+      return google.getUserInfo(
+        await google.getAccessToken({ code, redirectUri }),
+      )
     }
+    if (idp === 'FACEBOOK') {
+      const redirectUri = `${taskerBaseEndpoint}/oauth2/callback/facebook`
+      return facebook.getUserInfo(
+        await facebook.getAccessToken({ code, redirect_uri: redirectUri }),
+      )
+    }
+    if (idp === 'NAVER') {
+      // let redirectUri = `${taskerBaseEndpoint}/oauth2/callback/naver`
+      return naver.getUserInfo(await naver.getAccessToken({ code }))
+    }
+    if (idp === 'KAKAO') {
+      let redirectUri = `${taskerBaseEndpoint}/oauth2/callback/kakao`
+      if (platform === 'ANDROID' || platform === 'IOS') {
+        redirectUri = `kakao${process.env.TASKER_OAUTH2_KAKAO_CLIENT_ID}://oauth`
+      }
+      return kakao.getUserInfo(
+        await kakao.getAccessToken({ code, redirect_uri: redirectUri }),
+      )
+    }
+    throw new Error('idp is invalid')
   })()
-
-  const idpAccessToken = await oauth2Client.getAccessToken(code)
-  const userInfo = await oauth2Client.getUserInfo(idpAccessToken)
 
   const {
     identity_connection: { edges },

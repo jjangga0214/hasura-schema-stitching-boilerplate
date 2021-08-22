@@ -32,7 +32,6 @@ export const getExecutor: (
 ) => AsyncExecutor =
   (defaultHeaders?: Record<string, string>) =>
   async ({ document, variables, context }) => {
-    console.log(JSON.stringify(context?.headers, null, 2))
     const query = print(document)
     const fetchResult = await fetch(
       `${process.env.HASURA_ENDPOINT_SCHEME_HTTP}://${process.env.HASURA_ENDPOINT_IP}:${process.env.HASURA_ENDPOINT_PORT}${process.env.HASURA_ENDPOINT_PATH_GRAPHQL}`,

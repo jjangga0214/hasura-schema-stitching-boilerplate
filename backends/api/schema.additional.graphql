@@ -9,6 +9,13 @@ type Mutation {
 input SignInOrUpInput {
   code: String!
   idp: IdpEnum!
+  platform: PlatformEnum!
+}
+
+enum PlatformEnum {
+  ANDROID
+  IOS
+  WEB
 }
 
 enum IdpEnum {
@@ -24,7 +31,7 @@ enum SignInOrUpResult {
 }
 
 type SignInOrUpMPayload {
-  result: SignInOrUpResult!
   id: ID
   accessToken: String!
+  result: SignInOrUpResult!
 }

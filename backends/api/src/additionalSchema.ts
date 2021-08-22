@@ -8,10 +8,8 @@ const resolvers = {
   Mutation: {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    signInOrUp: async (_, { input: { code, idp } }) => {
-      console.log(code, idp)
-      return signInOrUp({ code, idp })
-    },
+    signInOrUp: async (_, { input: { code, idp, platform } }) =>
+      signInOrUp({ code, idp, platform }),
   },
   Query: {
     ping: () => new Date().toISOString(),

@@ -7,29 +7,48 @@ import { Overwrite } from 'utility-types'
  * REF: https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api
  */
 
-const redirectUri = `${process.env.FRONTEND_ENDPOINT_SCHEME}://${process.env.FRONTEND_ENDPOINT_IP}:${process.env.FRONTEND_ENDPOINT_PORT}/oauth2/callback/kakao`
+interface GetAuthUrlOptions {
+  redirect_uri: string
+  client_id?: string
+  response_type?: string
+  // scope 는 querystring 으로 넘기지 않고 내 어플리케이션 설정에서 미리 정해놓는다.
+  // TODO: not using state?
+  state: string
+}
 
-export function getAuthUrl(params?: Record<string, string>) {
+export function getAuthUrl({
+  client_id = process.env.API_OAUTH2_KAKAO_CLIENT_ID,
+  response_type = 'code',
+  redirect_uri,
+  // scope 는 querystring 으로 넘기지 않고 내 어플리케이션 설정에서 미리 정해놓는다.
+  // TODO: not using state?
+  state = '1111',
+}: GetAuthUrlOptions) {
   return `https://kauth.kakao.com/oauth/authorize?${qs.stringify({
-    client_id: process.env.API_OAUTH2_KAKAO_CLIENT_ID,
-    redirect_uri: redirectUri,
-    response_type: 'code',
+    client_id,
+    redirect_uri,
+    response_type,
     // scope 는 querystring 으로 넘기지 않고 내 어플리케이션 설정에서 미리 정해놓는다.
     // TODO: not using state?
-    state: 1111,
-    ...params,
+    state,
   })}`
 }
 
-export async function getAccessToken(code: string) {
-  const params = {
-    grant_type: 'authorization_code',
-    client_id: process.env.API_OAUTH2_KAKAO_CLIENT_ID,
-    client_secret: process.env.API_OAUTH2_KAKAO_CLIENT_SECRET,
-    redirect_uri: redirectUri,
-    code,
-  }
+interface GetAccessTokenOptions {
+  grant_type?: string
+  client_id?: string
+  client_secret?: string
+  redirect_uri: string
+  code: string
+}
 
+export async function getAccessToken({
+  grant_type = 'authorization_code',
+  client_id = process.env.API_OAUTH2_KAKAO_CLIENT_ID,
+  client_secret = process.env.API_OAUTH2_KAKAO_CLIENT_SECRET,
+  redirect_uri,
+  code,
+}: GetAccessTokenOptions) {
   interface Response {
     token_type: 'bearer' //	토큰 타입, bearer로 고정
     access_token: string //	사용자 액세스 토큰 값
@@ -41,7 +60,13 @@ export async function getAccessToken(code: string) {
   try {
     const res = await axios.post<Response>(
       `https://kauth.kakao.com/oauth/token`,
-      qs.stringify(params),
+      qs.stringify({
+        grant_type,
+        client_id,
+        client_secret,
+        redirect_uri,
+        code,
+      }),
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',

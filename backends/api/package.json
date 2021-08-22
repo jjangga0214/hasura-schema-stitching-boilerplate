@@ -24,6 +24,7 @@
     "accessToken": "yarn withenv ts-node workflow/index.ts",
     "ts": "yarn withenv ts-node",
     "dev": "yarn withenv ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "devstart": "yarn ts src/index.ts",
     "start": "node dist/index.js"
   },
   "devDependencies": {

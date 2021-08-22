@@ -6,33 +6,51 @@ import qs from 'qs'
  * REF: https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow/
  */
 
-const redirectUri = `${process.env.FRONTEND_ENDPOINT_SCHEME}://${process.env.FRONTEND_ENDPOINT_IP}:${process.env.FRONTEND_ENDPOINT_PORT}/oauth2/callback/facebook`
-
 const httpClient = axios.create({
   baseURL: 'https://graph.facebook.com/v10.0',
 })
 
-export function getAuthUrl() {
-  const params = {
-    client_id: process.env.API_OAUTH2_FACEBOOK_CLIENT_ID,
-    redirect_uri: redirectUri,
-    // TODO: not using state?
-    state: 1111,
-    response_type: 'code',
-    // REF: https://developers.facebook.com/docs/permissions/reference
-    scope: ['public_profile', 'email'].join(','),
-  }
-  return `https://www.facebook.com/v10.0/dialog/oauth?${qs.stringify(params)}`
+interface GetAuthUrlOptions {
+  client_id?: string
+  redirect_uri: string
+  state?: string
+  response_type?: string
+  scope?: string
 }
 
-export async function getAccessToken(code: string) {
-  const params = {
-    client_id: process.env.API_OAUTH2_FACEBOOK_CLIENT_ID,
-    client_secret: process.env.API_OAUTH2_FACEBOOK_CLIENT_SECRET,
-    redirect_uri: redirectUri,
-    code,
-  }
+export function getAuthUrl({
+  client_id = process.env.API_OAUTH2_FACEBOOK_CLIENT_ID,
+  redirect_uri,
+  // TODO: not using state?
+  state = '1111',
+  response_type = 'code',
+  // REF: https://developers.facebook.com/docs/permissions/reference
+  scope = ['public_profile', 'email'].join(','),
+}: GetAuthUrlOptions) {
+  return `https://www.facebook.com/v10.0/dialog/oauth?${qs.stringify({
+    client_id,
+    redirect_uri,
+    // TODO: not using state?
+    state,
+    response_type,
+    // REF: https://developers.facebook.com/docs/permissions/reference
+    scope,
+  })}`
+}
 
+interface GetAccessTokenOptions {
+  client_id?: string
+  client_secret?: string
+  redirect_uri: string
+  code: string
+}
+
+export async function getAccessToken({
+  client_id = process.env.API_OAUTH2_FACEBOOK_CLIENT_ID,
+  client_secret = process.env.API_OAUTH2_FACEBOOK_CLIENT_SECRET,
+  redirect_uri,
+  code,
+}: GetAccessTokenOptions) {
   interface Response {
     access_token: string
     token_type: string // type,
@@ -40,7 +58,12 @@ export async function getAccessToken(code: string) {
   }
 
   const res = await httpClient.get<Response>(
-    `/oauth/access_token?${qs.stringify(params)}`,
+    `/oauth/access_token?${qs.stringify({
+      client_id,
+      client_secret,
+      redirect_uri,
+      code,
+    })}`,
   )
 
   return res.data.access_token
