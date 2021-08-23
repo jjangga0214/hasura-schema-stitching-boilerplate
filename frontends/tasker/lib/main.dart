@@ -9,6 +9,7 @@ import 'package:tasker/pages/login.dart';
 import 'controllers/main.dart';
 import 'pages/home.dart';
 import 'generated/env.dart';
+import 'constants/colors.dart';
 import 'graphql/client.dart';
 
 void main() async {
@@ -58,6 +59,11 @@ class Tasker extends StatelessWidget {
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
           primarySwatch: Colors.blue,
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: BLACK_GREY,
+                displayColor: BLACK_GREY,
+                fontFamily: 'SFProText',
+              ),
         ),
         home: this.isLogined ? HomePage() : LoginPage(),
       ),
