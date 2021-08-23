@@ -29,11 +29,11 @@ import path from 'path'
 import dotenv from 'dotenv'
 import dotenvExpand from 'dotenv-expand'
 
-const envVars: Record<string, string | boolean | number> = {}
+const envVars: Record<string, string | boolean | number | null> = {}
 
 interface Target {
   filename: string
-  validate: (key: string, value: string | boolean | number) => boolean
+  validate: (key: string, value: string | boolean | number | null) => boolean
 }
 
 for (const { filename, validate } of [
@@ -47,6 +47,7 @@ for (const { filename, validate } of [
         'API_ENDPOINT_PORT',
         'API_ENDPOINT_SCHEME_HTTP',
         'API_ENDPOINT_PATH_GRAPHQL',
+        'TASKER_OAUTH2_KAKAO_CLIENT_ID',
       ].includes(key),
   },
 ] as Target[]) {
@@ -61,15 +62,19 @@ for (const { filename, validate } of [
   const { parsed } = result
   for (const key in parsed) {
     if (Object.prototype.hasOwnProperty.call(parsed, key)) {
-      let value: string | boolean | number = parsed[key]
+      let value: string | boolean | number | null = parsed[key]
       if (value.split('.').length <= 2) {
         // e.g. IP address 192.168.0.5
         value = parseInt(value, 10) || value
       }
       if (value === 'true') {
         value = true
-      } else if (value === 'false') {
+      }
+      if (value === 'false') {
         value = false
+      }
+      if (value === 'null') {
+        value = null
       }
       if (validate(key, value)) {
         envVars[key] = value

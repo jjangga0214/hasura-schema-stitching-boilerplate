@@ -12,29 +12,41 @@ import 'generated/env.dart';
 import 'graphql/client.dart';
 
 void main() async {
+  /// required by flutter_secure_storage
+  WidgetsFlutterBinding.ensureInitialized();
   KakaoContext.clientId = TASKER_OAUTH2_KAKAO_CLIENT_ID;
   final storage = new FlutterSecureStorage();
+  if (TASKER_API_ACCESS_TOKEN != null) {
+    await storage.write(key: 'accessToken', value: TASKER_API_ACCESS_TOKEN);
+  }
+
   String? accessToken = null;
-  try {
-    accessToken = await storage.read(key: 'accessToken');
-  } catch (e) {}
-  runApp(MyApp(
+  // todo: implements internet connection exception handling
+  // todo: implements refreshing accessToken if expired.
+  // todo: remove the code below
+  await storage.delete(key: 'accessToken');
+  accessToken = await storage.read(key: 'accessToken');
+  runApp(Tasker(
     isLogined: accessToken != null,
+    graphQLClient: createGraphQLClient(),
   ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({required this.isLogined, Key? key}) : super(key: key);
+class Tasker extends StatelessWidget {
+  const Tasker({required this.isLogined, required this.graphQLClient, Key? key})
+      : super(key: key);
   // This widget is the root of your application.
   final bool isLogined;
+  final ValueNotifier<GraphQLClient> graphQLClient;
 
   @override
   Widget build(BuildContext context) {
     Get.put(MainController());
+
     return GraphQLProvider(
-      client: createGraphQLClient(),
+      client: this.graphQLClient,
       child: GetMaterialApp(
-        title: 'Flutter Demo',
+        title: 'Tasker',
         theme: ThemeData(
           // This is the theme of your application.
           //
@@ -47,7 +59,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: this.isLogined ? LoginPage() : HomePage(),
+        home: this.isLogined ? HomePage() : LoginPage(),
       ),
     );
   }
