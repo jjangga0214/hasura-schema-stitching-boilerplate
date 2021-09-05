@@ -6,11 +6,11 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "@jjangga0214/*": ["*/src"],
+      "@jjangga0214/*": ["backends/*/src", "frontends/*/src", "packages/*/src"],
       "#foo/*": ["packages/foo/src/*"],
       "#bar/*": ["packages/bar/src/*"],
       "#api/*": ["backends/api/src/*"],
-      "#*": ["*/src"]
+      "#*": ["backends/*/src", "frontends/*/src", "packages/*/src"]
     },
     "strict": true,
     "noUnusedLocals": true,

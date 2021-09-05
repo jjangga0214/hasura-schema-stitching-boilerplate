@@ -1,5 +1,9 @@
 import { fetch } from 'cross-fetch'
-import { print, GraphQLFieldConfig } from 'graphql'
+import {
+  print,
+  GraphQLFieldConfig,
+  GraphQLFieldConfigArgumentMap,
+} from 'graphql'
 import { AsyncExecutor } from '@graphql-tools/utils'
 import {
   RenameTypes,
@@ -58,8 +62,10 @@ function changeCase(
   return `${target.match(/^_+/g) || ''}${change(target)}`
 }
 
-function transformFieldConfig(fieldConfig: GraphQLFieldConfig<any, any>) {
-  const newArgs: { [key: string]: any } = {}
+function transformFieldConfig(
+  fieldConfig: GraphQLFieldConfig<unknown, unknown>,
+) {
+  const newArgs: GraphQLFieldConfigArgumentMap = {}
   for (const argName in fieldConfig.args) {
     if (Object.prototype.hasOwnProperty.call(fieldConfig.args, argName)) {
       newArgs[changeCase(argName)] = fieldConfig.args[argName]

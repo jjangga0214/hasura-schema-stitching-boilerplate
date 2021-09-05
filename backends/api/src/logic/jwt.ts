@@ -18,7 +18,7 @@ interface GqlUser {
   id: string
   uid: string
   roles: { role: string }[]
-  [key: string]: any
+  [key: string]: unknown
 }
 export interface TokenPayload {
   kind: TokenKind
@@ -36,7 +36,7 @@ export interface TokenPayload {
 }
 
 export interface SignOptions extends jwt.SignOptions {
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export function sign(payload: TokenPayload, options?: SignOptions) {
@@ -50,7 +50,7 @@ export function sign(payload: TokenPayload, options?: SignOptions) {
 /**
  * It will throw an error if the token is invalid.
  */
-export function verify<T extends { [key: string]: any } = TokenPayload>(
+export function verify<T extends { [key: string]: unknown } = TokenPayload>(
   token: string,
   options?: jwt.VerifyOptions,
 ): T {
@@ -102,7 +102,7 @@ export function createAdminServiceAccountAccessToken(options?: SignOptions) {
   })
 }
 
-// eslint-disable-next-line no-underscore-dangle
+// eslint-disable-next-line no-underscore-dangle,@typescript-eslint/naming-convention
 let _adminServiceAccountAccessToken = createAdminServiceAccountAccessToken()
 
 export function adminServiceAccountAccessToken() {

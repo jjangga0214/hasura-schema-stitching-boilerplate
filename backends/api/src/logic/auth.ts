@@ -101,11 +101,10 @@ export async function signInOrUp({ code, idp, platform }: SignInOrUpOptions) {
         edges.length === 1,
         `idp_id, ${userInfo.id}, is not unique for ${idp}.`,
       )
-      const { user } = edges[0].node
-      return { result: 'SIGN_IN', user }
+      return { result: 'SIGN_IN', user: edges[0].node.user }
     }
 
-    // eslint-disable-next-line camelcase
+    // eslint-disable-next-line camelcase, @typescript-eslint/naming-convention
     const { insert_user } = await gqlHasuraAdminClient.request(
       gqlInsertUserMutation,
       {
@@ -134,7 +133,7 @@ export async function signInOrUp({ code, idp, platform }: SignInOrUpOptions) {
         ],
       },
     )
-
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     const user = insert_user?.returning[0]
     assert(user, 'user is not inserted.')
     return { result: 'SIGN_UP', user }

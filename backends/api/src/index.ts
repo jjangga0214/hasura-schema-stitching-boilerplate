@@ -38,7 +38,7 @@ async function main() {
     // eslint-disable-next-line spaced-comment, @typescript-eslint/ban-ts-comment
     //@ts-ignore
     context: ({ req, connection }) => {
-      const headers: { [key: string]: any } =
+      const headers: { [key: string]: string } =
         (connection && connection.context ? connection.context : req.headers) ||
         {}
 

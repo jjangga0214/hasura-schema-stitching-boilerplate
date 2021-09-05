@@ -76,14 +76,19 @@ module.exports = {
       ...common,
       files: ['**/*.ts'],
       parser: '@typescript-eslint/parser',
+      parserOptions: {
+        project: './tsconfig.json', // REF: https://www.npmjs.com/package/eslint-config-airbnb-typescript
+      },
       env: common.env,
       plugins: [...common.plugins, '@typescript-eslint'],
       extends: [
         ...common.extends,
+        'airbnb-typescript/base', // "base" does not include tsx rules. REF: https://www.npmjs.com/package/eslint-config-airbnb-typescript
         'plugin:@typescript-eslint/recommended',
         'plugin:import/errors',
         'plugin:import/warnings',
         'plugin:import/typescript',
+        'prettier', // Let prettier have high priority
       ],
       rules: {
         ...common.rules,

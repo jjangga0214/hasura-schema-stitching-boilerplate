@@ -24,7 +24,7 @@ export const pgClient = new Client({
 export async function withPgClient<R>(callback: (client: Client) => R) {
   await pgClient.connect()
   try {
-    return await callback(pgClient)
+    return callback(pgClient)
   } catch (error) {
     await pgClient.end()
     throw error

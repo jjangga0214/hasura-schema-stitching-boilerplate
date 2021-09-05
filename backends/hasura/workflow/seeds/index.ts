@@ -2,7 +2,7 @@ import faker from 'faker'
 import { gql } from 'graphql-tag'
 import { gqlClient } from '../client'
 
-import { createIdentityInsertInput, createUserInsertInput } from './insertUser'
+import { createIdentityInsertInput, createUserInsertInput } from './insert-user'
 
 // REF: https://github.com/marak/Faker.js/#setting-a-randomness-seed
 faker.seed(18927032225828788)
@@ -40,7 +40,7 @@ const gqlInsertUserMutation = gql`
 
 export default async function seed() {
   const gqlInsertUserMutationVariables = {
-    objects: [] as Record<string, any>,
+    objects: [] as Record<string, unknown>[],
   }
   for (let index = 0; index < 10; index += 1) {
     const userInsertInput = createUserInsertInput()
